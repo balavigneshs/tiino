@@ -15,11 +15,12 @@ import javax.ws.rs.core.MediaType;
 // The browser requests per default the HTML MIME type.
 
 //Sets the path to base URL + /hello
-@Path("/Tiino_Services")
+@Path("/tiino_services")
 public class Tiino_Services {
 
   // This method is called if TEXT_PLAIN is request
   @GET
+  @Secured
   @Produces(MediaType.TEXT_PLAIN)
   public String sayPlainTextHello() {
     return "Welcome to TIINO";
@@ -27,6 +28,7 @@ public class Tiino_Services {
 
   // This method is called if XML is request
   @GET
+  @Secured
   @Produces(MediaType.TEXT_XML)
   public String sayXMLHello() {
     return "<?xml version=\"1.0\"?>" + "<hello>Welcome to TIINO" + "</hello>";
@@ -34,6 +36,7 @@ public class Tiino_Services {
 
   // This method is called if HTML is request
   @GET
+  @Secured
   @Produces(MediaType.TEXT_HTML)
   public String sayHtmlHello() {
     return "<html> " + "<title>" + "Welcome to TIINO" + "</title>"
