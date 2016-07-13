@@ -1,6 +1,7 @@
 package com.tiino.services;
 
 import java.io.IOException;
+import java.security.Principal;
 
 import javax.annotation.*;
 import javax.ws.rs.*;
@@ -8,11 +9,13 @@ import javax.ws.rs.container.*;
 import javax.ws.rs.core.*;
 import javax.ws.rs.ext.*;
 
+
 @Secured
 @Provider
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter,ContainerResponseFilter  {
 
+		
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
 
@@ -32,6 +35,35 @@ public class AuthenticationFilter implements ContainerRequestFilter,ContainerRes
 
             // Validate the token
             validateToken(token);
+            requestContext.setSecurityContext(new SecurityContext() {
+
+                @Override
+                public Principal getUserPrincipal() {
+
+                    return new Principal() {
+
+                        @Override
+                        public String getName() {
+                            return "welcome bala";
+                        }
+                    };
+                }
+
+                @Override
+                public boolean isUserInRole(String role) {
+                    return true;
+                }
+
+                @Override
+                public boolean isSecure() {
+                    return false;
+                }
+
+                @Override
+                public String getAuthenticationScheme() {
+                    return null;
+                }
+            });
 
         } catch (Exception e) {
             requestContext.abortWith(

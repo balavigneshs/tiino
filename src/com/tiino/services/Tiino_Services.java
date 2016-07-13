@@ -1,9 +1,13 @@
 package com.tiino.services;
 
+import java.security.Principal;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 
 // Plain old Java Object it does not extend as class or implements 
 // an interface
@@ -22,25 +26,28 @@ public class Tiino_Services {
   @GET
   @Secured
   @Produces(MediaType.TEXT_PLAIN)
-  public String sayPlainTextHello() {
-    return "Welcome to TIINO";
+  public String sayPlainTextHello(@Context SecurityContext securityContext) {
+	  Principal principal = securityContext.getUserPrincipal();
+	    String username = principal.getName();
+    return username;
   }
 
-  // This method is called if XML is request
-  @GET
-  @Secured
-  @Produces(MediaType.TEXT_XML)
-  public String sayXMLHello() {
-    return "<?xml version=\"1.0\"?>" + "<hello>Welcome to TIINO" + "</hello>";
-  }
+//  // This method is called if XML is request
+//  @GET
+//  @Secured
+//  @Produces(MediaType.TEXT_XML)
+//  public String sayXMLHello() {
+//    return "<?xml version=\"1.0\"?>" + "<hello>Welcome to TIINO" + "</hello>";
+//  }
 
   // This method is called if HTML is request
   @GET
   @Secured
   @Produces(MediaType.TEXT_HTML)
-  public String sayHtmlHello() {
-    return "<html> " + "<title>" + "Welcome to TIINO" + "</title>"
-        + "<body><h1>" + "Welcome to TIINO" + "</body></h1>" + "</html> ";
+  public String sayHtmlHello(@Context SecurityContext securityContext) {
+	  Principal principal = securityContext.getUserPrincipal();
+	    String username = principal.getName();
+  return username;
   }
 
 } 

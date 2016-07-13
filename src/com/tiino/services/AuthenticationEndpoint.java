@@ -1,11 +1,13 @@
 package com.tiino.services;
 
 import javax.ws.rs.*;
+import java.security.SecureRandom;
+import java.math.BigInteger;
 import javax.ws.rs.core.*;
 
 @Path("/authentication")
 public class AuthenticationEndpoint {
-
+	private SecureRandom random = new SecureRandom();
     @POST
     @Produces("application/json")
     @Consumes("application/x-www-form-urlencoded")
@@ -39,6 +41,6 @@ public class AuthenticationEndpoint {
         // Issue a token (can be a random String persisted to a database or a JWT token)
         // The issued token must be associated to a user
         // Return the issued token
-    	return "sdfsbfjbsdfhvhsvfh";
+    	return new BigInteger(130, random).toString(32);
     }
 }
