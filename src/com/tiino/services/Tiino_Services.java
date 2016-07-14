@@ -24,14 +24,23 @@ public class Tiino_Services {
 
   // This method is called if TEXT_PLAIN is request
   @GET
-  @Secured
+  @Secured({Roles.User})
+  @Path("/textHello")
   @Produces(MediaType.TEXT_PLAIN)
   public String sayPlainTextHello(@Context SecurityContext securityContext) {
 	  Principal principal = securityContext.getUserPrincipal();
 	    String username = principal.getName();
     return username;
   }
-
+  @GET
+  @Secured({Roles.Admin})
+  @Path("/textHello")
+  @Produces(MediaType.TEXT_PLAIN)
+  public String sayPlainTextHelloAdmin(@Context SecurityContext securityContext) {
+	  Principal principal = securityContext.getUserPrincipal();
+	    String username = principal.getName();
+	    return username;
+  }
 //  // This method is called if XML is request
 //  @GET
 //  @Secured
@@ -40,14 +49,14 @@ public class Tiino_Services {
 //    return "<?xml version=\"1.0\"?>" + "<hello>Welcome to TIINO" + "</hello>";
 //  }
 
-  // This method is called if HTML is request
-  @GET
-  @Secured
-  @Produces(MediaType.TEXT_HTML)
-  public String sayHtmlHello(@Context SecurityContext securityContext) {
-	  Principal principal = securityContext.getUserPrincipal();
-	    String username = principal.getName();
-  return username;
-  }
+//  // This method is called if HTML is request
+//  @GET
+//  @Secured
+//  @Produces(MediaType.TEXT_HTML)
+//  public String sayHtmlHello(@Context SecurityContext securityContext) {
+//	  Principal principal = securityContext.getUserPrincipal();
+//	    String username = principal.getName();
+//  return username;
+//  }
 
 } 
