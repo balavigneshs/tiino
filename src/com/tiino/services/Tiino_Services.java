@@ -34,7 +34,7 @@ public class Tiino_Services {
   }
   @GET
   @Secured({Roles.Admin})
-  @Path("/textHello")
+  @Path("/textHelloAdmin")
   @Produces(MediaType.TEXT_PLAIN)
   public String sayPlainTextHelloAdmin(@Context SecurityContext securityContext) {
 	  Principal principal = securityContext.getUserPrincipal();
